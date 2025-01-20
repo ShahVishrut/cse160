@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Change a point color</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="ColoredPoints.js"></script>
+    <script src="Point.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="CustomTriangle.js"></script>
+    <script src="Rectangle.js"></script>
+
+    <br>
+    <input type="button" value="Points" id="points">
+    <input type="button" value="Triangles" id="triangles">
+    <input type="button" value="Circles" id="circles">
+    <br>
+    <input type="button" value="Custom Square" id="customSquare">
+    <input type="button" value="Custom Circle" id="customCircle">
+
+    <br>
+    <label for="red">Red</label>
+    <input type="range" min="0" max="100" id="red" name="red">
+    <label for="green">Green</label>
+    <input type="range" min="0" max="100" id="green" name="green">
+    <label for="blue">Blue</label>
+    <input type="range" min="0" max="100" id="blue" name="blue">
+    <br><br>
+
+    <label for="size">Shape Size:</label>
+    <input type="range" min="5" max="40" id="size" name="size">
+
+    <label for="segments">Circle Segment Count:</label>
+    <input type="range" min="3" max="20" id="segments" name="segments">
+
+    <br>
+    <input type="button" value="Recreate Drawing" onclick="drawHalloween()">
+
+    <input type="button" value="Clear" onclick="clearCanvas()">
+
+    <br>
+    <img src="Image.jpeg" alt="Hand Drawn" width="200" height="200">
+  </body>
+</html>
