@@ -182,25 +182,25 @@ function renderScene() {
   mat4.translate(0.22,0.1,0.05);
   mat4.rotate(180 + leg1_Angle, 1, 0, 0);
   mat4.scale(0.05, 0.5, 0.05);
-  drawCube(mat4, [1.0,1.0,1.0,1.0]);
+  drawCube(mat4, [0.87,0.75,0.33,1.0]);
 
   mat4 = new Matrix4();
   mat4.translate(0.04,0.1,0.05);
   mat4.rotate(180 + leg2_Angle, 1, 0, 0);
   mat4.scale(0.05, 0.5, 0.05);
-  drawCube(mat4, [1.0,1.0,1.0,1.0]);
+  drawCube(mat4, [0.87,0.75,0.33,1.0]);
 
   mat4 = new Matrix4();
   mat4.translate(0.22,0.1,0.45);
   mat4.rotate(180 + leg1_Angle, 1, 0, 0);
   mat4.scale(0.05, 0.5, 0.05);
-  drawCube(mat4, [1.0,1.0,1.0,1.0]);
+  drawCube(mat4, [0.87,0.75,0.33,1.0]);
 
   mat4 = new Matrix4();
   mat4.translate(0.04,0.1,0.45);
   mat4.rotate(180 + leg2_Angle, 1, 0, 0);
   mat4.scale(0.05, 0.5, 0.05);
-  drawCube(mat4, [1.0,1.0,1.0,1.0]);
+  drawCube(mat4, [0.87,0.75,0.33,1.0]);
 
   mat4 = new Matrix4();
   mat4.translate(0.11,0.08,0.54);
