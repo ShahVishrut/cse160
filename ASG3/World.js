@@ -70,11 +70,13 @@ let map;
 let map_pos;
 
 let gameActive = false;
-let gameCubeIndex;
+let gameCubeIndex = null;
 let gameCubeX;
 let gameCubeY;
 let gameCubeZ;
 let secCorrect = 0;
+let gameScore = 0;
+let gameStart;
 
 function setupWebGL() {
   // Retrieve <canvas> element
@@ -216,6 +218,8 @@ function main() {
 
   document.onkeydown = keydown;
   document.onmousemove = mousemove;
+
+  document.getElementById("loadMap").onchange = loadMap;
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -375,11 +379,25 @@ function mousemove(ev) {
   
 }
 
+function resetGame() {
+  if (gameActive = true) {
+    gameActive = false;
+    secCorrect = 0;
+    if (gameCubeIndex != null) {
+      g_shapesList[gameCubeIndex].matrix.scale(0,0,0);
+    }
+    gameScore = 0;
+  }
+}
+
 function startGame() {
+  resetGame();
+  camera.reset();
+  prevMousePos = null;
   gameActive = true;
   for (var x = 0; x < map.length; x++) {
     for (var y = 0; y < map[0].length; y++) {
-      map[x][y] = Math.floor(Math.random() * 5);
+      map[x][y] = Math.floor(Math.random() * 4);
     }
   }
   var target = new Cube();
@@ -388,13 +406,25 @@ function startGame() {
   gameCubeZ = Math.floor(Math.random() * 5);
   target.matrix.translate(-0.1 + gameCubeX, -0.1 + gameCubeY, gameCubeZ);
   target.matrix.scale(1.2, 1.2, 1);
-  g_shapesList.push(target);
-  gameCubeIndex = g_shapesList.length - 1;
+  if (gameCubeIndex == null) {
+    g_shapesList.push(target);
+    gameCubeIndex = g_shapesList.length - 1;
+  } else {
+    g_shapesList[gameCubeIndex] = target;
+  }
+  gameStart = performance.now() / 1000.0;
 }
 
 function updateGame() {
+  let timeRemaining = Math.floor(120 - (performance.now() / 1000.0 - gameStart));
+  document.getElementById("score").innerText = "Time Remaining: " + timeRemaining + " Score: " + gameScore;
+  if (timeRemaining <= 0) {
+    document.getElementById("score").innerText = "Your final score was: " + gameScore;
+    resetGame();
+  }
   if (secCorrect == 15) {
     secCorrect = 0;
+    gameScore++;
     gameCubeX = Math.floor(Math.random() * map.length);
     gameCubeY = Math.floor(Math.random() * map[0].length);
     gameCubeZ = Math.floor(Math.random() * 5);
@@ -408,6 +438,53 @@ function updateGame() {
     g_shapesList[gameCubeIndex].color = [1,1,1,1.0];
     secCorrect = 0;
   }
+}
+
+function loadMap(ev) {
+  let file = ev.target.files[0];
+  let reader = new FileReader();
+  resetGame();
+
+  reader.addEventListener(
+    "load",
+    () => {
+      let data = reader.result;
+      let tokens = data.split("\n");
+      let rows = parseInt(tokens[0]);
+      let columns = parseInt(tokens[1]);
+      map = [];
+      for (var x = 0; x < rows; x++) {
+        map.push([]);
+        for (var y = 0; y < columns; y++) {
+          let nextVal = parseInt(tokens[columns * x + y + 2]);
+          map[x].push(nextVal);
+        }
+      }
+    }
+  );
+
+  if (file) {
+    reader.readAsText(file);
+  }
+}
+
+function saveMap() {
+  var text = "";
+  text += map.length;
+  text += "\n";
+  text += map[0].length;
+  text += "\n";
+  for (var x = 0; x < map.length; x++) {
+    for (var y = 0; y < map[0].length; y++) {
+      text += map[x][y];
+      text += "\n";
+    }
+  }
+  var downloader = document.getElementById("download");
+  var file = new Blob([text], {type: 'text/plain'});
+  downloader.href = URL.createObjectURL(file);
+  downloader.download = "map.txt";
+  downloader.click();
 }
 
 

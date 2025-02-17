@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Change a point color</title>
+    <title>Hidden Blocks</title>
   </head>
 
   <body onload="main()">
@@ -19,7 +19,18 @@
     <script src="Camera.js"></script>
 
 
+    <p id="score"></p>
     <p id="fps">FPS</p>
+
     <input type="button" value="Start Game" id="game" onclick="startGame()">
+
+    <a href="" id="download"></a>
+    <input type="button" value="Save Map" onclick="saveMap()">
+
+    <input type="file" id="loadMap">
+
+    <p>Use WASD to move around. Use Q and E or the mouse for rotation. Reset the camera with R. Aim the red cursor and press Z to build and X to destroy blocks.</p>
+    <p>Goal of the Game: A white cube will spawn somewhere in the map. Note: It may even spawn inside a stack of blocks. The stack of blocks at that location should exactly match the height of the white cube. The cube will turn green and move to another location when done correctly. If you get lucky, the stack at the spawned location is already correct, and you get a free point! Get as many as you can in 2 minutes!</p>
+    <p>You can save and load maps as txt files.</p>
   </body>
 </html>
