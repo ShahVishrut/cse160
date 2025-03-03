@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hidden Blocks</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="1200" height="650">
+    Please use a browser that supports "canvas"
+    </canvas>
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+    <script src="World.js"></script>
+    <script src="Cube.js"></script>
+    <script src="Sphere.js"></script>
+    <script src="Camera.js"></script>
+    <script src="Aggregate.js"></script>
+
+    <p id="fps">FPS</p>
+
+    <input type="button" value="Normal Visualization" id="normal">
+    <input type="button" value="Toggle Auto Light Movement" id="light_animation">
+    <input type="button" value="Toggle Point Light" id="point_light">
+    <input type="button" value="Toggle Spotlight" id="spot_light">
+
+    <br>
+
+    <label for="light_pos">Point Light Position:</label>
+    <input type="range" min="0" max="32" id="light_pos">
+    <label for="light_r">Point Light RGB:</label>
+    <input type="range" min="0" max="255" value="255" id="light_r">
+    <input type="range" min="0" max="255" value="255" id="light_g">
+    <input type="range" min="0" max="255" value="255" id="light_b">
+
+    <p>Use WASD to move around. Use the arrow keys for rotation. Reset the camera with R. Aim the red cursor and press Z to build and X to destroy blocks.</p>
+    <p>The point light is the white cube in the sky, while the spotlight is the yellow cube.</p>
+  </body>
+</html>
